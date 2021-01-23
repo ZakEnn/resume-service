@@ -14,17 +14,23 @@ public class ResumeService {
     ResumeRepository resumeRepository;
 
     public Flux<Resume> getAll() {
-        return resumeRepository.findAll();
+        Flux<Resume> resumes = resumeRepository.findAll();
+        resumes.subscribe();
+        return resumes;
     }
 
     public Mono<Resume> getById(String id) {
-        return resumeRepository.findById(id);
+        Mono<Resume> resume =  resumeRepository.findById(id);
+        resume.subscribe();
+        return resume;
     }
 
     public Mono<Resume> storeResume(ResumeDto resumeDto) {
         Resume resume =  new Resume();
         resume.setId(resumeDto.getResumeId());
         resume.setResume(resumeDto.getResumeB64());
-        return resumeRepository.save(resume);
+        Mono<Resume> resumeSaved = resumeRepository.save(resume);
+        resumeSaved.subscribe();
+        return resumeSaved;
     }
 }

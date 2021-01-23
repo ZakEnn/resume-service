@@ -7,6 +7,7 @@ import com.zakenn.resume.service.ResumeService;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @CommonsLog
+@RequestMapping(value = "/ws-resume", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ResumeController {
 
     @Autowired
@@ -32,7 +34,6 @@ public class ResumeController {
     }
     @PostMapping("/store-cv")
     private ResponseEntity<Mono<Resume>> storeResume(@RequestBody ResumeDto resumeDto) {
-        log.info(resumeDto);
         Mono<Resume> storedResume = resumeService.storeResume(resumeDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(storedResume);
     }
