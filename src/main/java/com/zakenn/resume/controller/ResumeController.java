@@ -2,7 +2,6 @@ package com.zakenn.resume.controller;
 
 import com.zakenn.resume.dto.ResumeDto;
 import com.zakenn.resume.repository.Resume;
-import com.zakenn.resume.repository.ResumeRepository;
 import com.zakenn.resume.service.ResumeService;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
